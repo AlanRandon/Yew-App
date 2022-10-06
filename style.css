@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    @apply w-full h-full m-0 bg-base-50;
+  }
+
+  body {
+    @apply h-auto min-h-full p-4 w-full m-0;
+  }
+
+  * {
+    @apply box-border;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply bg-base-500 p-4 rounded shadow hover:bg-base-400 text-white focus-or-active:bg-base-600 transition-colors;
+  }
+}

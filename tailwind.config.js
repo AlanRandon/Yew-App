@@ -1,0 +1,35 @@
+/** @type {import('tailwindcss').Config} */
+
+const plugin = require("tailwindcss/plugin")
+const colors = require("tailwindcss/colors")
+
+module.exports = {
+  plugins: [
+    plugin(({ addVariant }) => {
+      addVariant("focus-or-active", "&:is(:focus, :active)")
+    }),
+  ],
+  content: ["./src/**/*.{html,rs,css}"],
+  theme: {
+    extend: {
+      spacing: {
+        input: "0.75em",
+      },
+      colors: {
+        transparent: "transparent",
+        // For impact points (e.g. btns)
+        primary: colors.amber,
+        // For gradients
+        "primary-analogous": colors.rose,
+        // For large blocks
+        base: colors.slate,
+      },
+      transitionDuration: {
+        input: "100ms",
+      },
+      backgroundImage: {
+        "random-img": "url(https://picsum.photos/536/354)",
+      },
+    },
+  },
+}

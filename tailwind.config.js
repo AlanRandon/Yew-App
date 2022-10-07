@@ -7,6 +7,7 @@ module.exports = {
   plugins: [
     plugin(({ addVariant }) => {
       addVariant("focus-or-active", "&:is(:focus, :active)")
+      addVariant("focus-active-or-hover", "&:is(:focus, :active, :hover)")
     }),
   ],
   content: ["./src/**/*.{html,rs,css}"],

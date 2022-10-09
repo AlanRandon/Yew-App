@@ -33,9 +33,9 @@ impl Component for Navbar {
 
     fn view(&self, _ctx: &Context<Self>) -> Html {
         html! {
-            <header class="bg-base-200 p-4 mb-4 flex flex-row gap-4 items-end">
+            <header class="bg-base-200 p-4 flex gap-4 items-end shadow">
                 <h1 class="text-2xl">{ "My App" }</h1>
-                <nav class="flex flex-row gap-4 items-end justify-end block grow">
+                <nav class="flex gap-4 items-end justify-end block grow flex-wrap">
                 {
                     LINKS.iter().map(|Link { text, url }| {
                         html!{

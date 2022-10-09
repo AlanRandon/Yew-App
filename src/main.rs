@@ -1,7 +1,11 @@
 #![warn(clippy::pedantic)]
 
+use card::Card;
+use counter::Counter;
+use navbar::Navbar;
 use yew::prelude::*;
 
+mod card;
 mod counter;
 mod navbar;
 
@@ -15,17 +19,23 @@ impl Component for App {
         Self {}
     }
 
-    // Returns `true` if a re-render is needed
-    fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
-        false
-    }
-
     fn view(&self, _ctx: &Context<Self>) -> Html {
         html! {
             <>
-                <navbar::Navbar />
-                <main class="p-4 grid justify-center">
-                    <counter::Counter />
+                <Navbar />
+                <main class="flex flex-col items-center gap-4 w-full p-4">
+                    <div class="card-container">
+                        <Card title="Lorem Ipsum">
+                            { "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat consectetur cupiditate, in itaque eum iste expedita asperiores similique. Aperiam, ad provident? Accusamus repudiandae aliquam dolore totam. Consequuntur, similique aperiam? Explicabo?" }
+                        </Card>
+                        <Card title="Lorem Ipsum">
+                            { "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat consectetur cupiditate, in itaque eum iste expedita asperiores similique. Aperiam, ad provident? Accusamus repudiandae aliquam dolore totam. Consequuntur, similique aperiam? Explicabo?" }
+                        </Card>
+                        <Card title="Lorem Ipsum">
+                            { "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat consectetur cupiditate, in itaque eum iste expedita asperiores similique. Aperiam, ad provident? Accusamus repudiandae aliquam dolore totam. Consequuntur, similique aperiam? Explicabo?" }
+                        </Card>
+                    </div>
+                    <Counter />
                 </main>
             </>
         }

@@ -9,6 +9,9 @@ pub struct Props {
 
     #[prop_or_default]
     pub title: Option<String>,
+
+    #[prop_or_default]
+    pub image: Option<String>,
 }
 
 impl Component for Card {
@@ -21,18 +24,28 @@ impl Component for Card {
 
     fn view(&self, ctx: &Context<Self>) -> Html {
         let props = ctx.props();
+        let title = if let Some(ref title) = props.title {
+            html!(
+                <h2 class="text-xl font-bold">{ title }</h2>
+            )
+        } else {
+            html!()
+        };
+        let image_alt = props.title.clone().unwrap_or_default();
+        let image = if let Some(ref source) = props.image {
+            html!(
+                <img src={source.clone()} class="h-32 w-full object-cover object-bottom bg-black" alt={image_alt} />
+            )
+        } else {
+            html!()
+        };
         html! {
-            <section class="bg-base-200 shadow rounded p-4 max-w-[min(40ch, fit)] m-4">
-                {
-                    if let Some(title) = &props.title {
-                        html!(
-                            <h2 class="text-xl font-bold">{ title }</h2>
-                        )
-                    } else {
-                        html!()
-                    }
-                }
-                { for props.children.iter() }
+            <section class="bg-base-200 shadow rounded max-w-[min(40ch, fit)] m-4 overflow-hidden">
+                { image }
+                <div class="p-4">
+                    { title }
+                    { for props.children.iter() }
+                </div>
             </section>
         }
     }

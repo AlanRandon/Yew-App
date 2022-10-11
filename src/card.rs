@@ -40,7 +40,7 @@ impl Component for Card {
             html!()
         };
         html! {
-            <section class="bg-base-200 shadow rounded max-w-[min(40ch, fit)] m-4 overflow-hidden">
+            <section class="bg-base-200 shadow rounded max-w-40ch m-4 overflow-hidden w-full">
                 { image }
                 <div class="p-4">
                     { title }

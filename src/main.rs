@@ -16,13 +16,16 @@ mod navbar;
 #[wasm_bindgen]
 extern "C" {
     #[wasm_bindgen(js_namespace = Math, js_name = random)]
-    fn js_random() -> i32;
+    fn js_random() -> f32;
 }
 
 lazy_static! {
     static ref WORDS: Vec<&'static str> = include_str!("lorem.txt").split_whitespace().collect();
     static ref RNG: Mutex<SmallRng> = {
-        let seed = js_random().to_be_bytes().into_iter().sum();
+        let seed = js_random()
+            .to_be_bytes()
+            .into_iter()
+            .fold(0_u64, |a, b| a + u64::from(b));
         Mutex::new(SmallRng::seed_from_u64(seed))
     };
 }
@@ -30,7 +33,7 @@ lazy_static! {
 fn lorem() -> String {
     let mut text = String::new();
     let mut rng = RNG.lock().unwrap();
-    for _ in 0..rng.gen_range(5..100) {
+    for _ in 0..rng.gen_range(5..10) {
         text += WORDS.choose(&mut *rng).expect("Failed to get word");
         text += " ";
     }
@@ -51,8 +54,8 @@ impl Component for App {
         html! {
             <>
                 <Navbar />
-                <main class="flex flex-col items-center gap-4 w-full p-4">
-                    <div class="card-container">
+                <main class="flex flex-col items-center gap-4 p-4">
+                    <div class="card-container grow gap-4 w-full">
                         {
                             for (0..=10).map(|i| {
                                 let image = format!("https://picsum.photos/536/354?random={}", i);

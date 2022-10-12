@@ -19,9 +19,9 @@ module.exports = {
       colors: {
         transparent: "transparent",
         // For impact points (e.g. btns)
-        primary: colors.amber,
+        primary: colors.sky,
         // For gradients
-        "primary-analogous": colors.rose,
+        "primary-analogous": colors.purple,
         // For large blocks
         base: colors.slate,
       },

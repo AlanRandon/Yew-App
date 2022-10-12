@@ -18,11 +18,21 @@
 
 @layer components {
   .btn {
-    @apply bg-primary-500 p-4 rounded shadow hover:bg-primary-400 text-white focus-or-active:bg-primary-600 transition-colors;
+    @apply bg-primary-600 p-4 rounded shadow hover:bg-primary-500 text-white focus-or-active:bg-primary-700 transition-colors;
   }
 
   .card-container {
     @apply grid justify-items-center;
     grid-template-columns: repeat(auto-fit, minmax(40ch, 1fr));
+  }
+
+  .gradient-mask {
+    @apply absolute left-0 top-0 w-full h-full;
+    background: linear-gradient(
+      to right bottom,
+      theme("colors.primary.400" / 60%) 0%,
+      transparent 70% 75%,
+      theme("colors.primary-analogous.400" / 30%) 100%
+    );
   }
 }

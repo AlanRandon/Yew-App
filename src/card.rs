@@ -34,15 +34,18 @@ impl Component for Card {
         let image_alt = props.title.clone().unwrap_or_default();
         let image = if let Some(ref source) = props.image {
             html!(
-                <img src={source.clone()} class="h-32 w-full object-cover object-bottom bg-black" alt={image_alt} />
+                <div class="relative">
+                    <div class="gradient-mask"></div>
+                    <img src={source.clone()} class="h-32 w-full object-cover object-bottom bg-black" alt={image_alt} />
+                </div>
             )
         } else {
             html!()
         };
         html! {
-            <section class="bg-base-200 shadow rounded max-w-40ch m-4 overflow-hidden w-full">
+            <section class="bg-base-200 shadow rounded max-w-40ch m-4 w-full">
                 { image }
-                <div class="p-4">
+                <div class="p-4 text-black/70">
                     { title }
                     { for props.children.iter() }
                 </div>

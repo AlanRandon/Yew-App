@@ -1,0 +1,4 @@
+# Robots go brrrrrrrrrrrrr
+
+User-agent: *
+Allow: /

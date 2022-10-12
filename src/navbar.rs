@@ -34,12 +34,12 @@ impl Component for Navbar {
     fn view(&self, _ctx: &Context<Self>) -> Html {
         html! {
             <header class="bg-base-200 p-4 flex gap-4 items-end shadow">
-                <h1 class="text-2xl">{ "My App" }</h1>
+                <h2 class="text-2xl">{ "My App" }</h2>
                 <nav class="flex gap-4 items-end justify-end block grow flex-wrap">
                 {
                     LINKS.iter().map(|Link { text, url }| {
                         html!{
-                            <a href={ *url } class="text-primary-500 hover:text-primary-400 focus-or-active:text-primary-600 border border-0 border-b-2 focus-active-or-hover:border-current transition-colors">
+                            <a href={ *url } class="text-black focus-active-or-hover:text-primary-700 border border-0 border-transparent border-b-2 focus-or-active:border-current transition-colors">
                                 { text }
                             </a>
                         }

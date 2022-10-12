@@ -33,7 +33,7 @@ lazy_static! {
 fn lorem() -> String {
     let mut text = String::new();
     let mut rng = RNG.lock().unwrap();
-    for _ in 0..rng.gen_range(5..10) {
+    for _ in 0..rng.gen_range(5..40) {
         text += WORDS.choose(&mut *rng).expect("Failed to get word");
         text += " ";
     }
@@ -54,8 +54,11 @@ impl Component for App {
         html! {
             <>
                 <Navbar />
-                <main class="flex flex-col items-center gap-4 p-4">
-                    <div class="card-container grow gap-4 w-full">
+                <div class="w-full p-4 grid place-items-center bg-gradient-to-r from-primary-400 to-primary-analogous-400">
+                    <h1 class="text-4xl font-black text-white">{ "My App" }</h1>
+                </div>
+                <main class="flex flex-col items-center gap-4 p-4 w-full">
+                    <div class="card-container grow gap-4">
                         {
                             for (0..=10).map(|i| {
                                 let image = format!("https://picsum.photos/536/354?random={}", i);

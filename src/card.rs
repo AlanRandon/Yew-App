@@ -35,7 +35,7 @@ impl Component for Card {
         let image = if let Some(ref source) = props.image {
             html!(
                 <div class="relative">
-                    <div class="gradient-mask"></div>
+                    <div class="gradient-mask pointer-events-none"></div>
                     <img src={source.clone()} class="h-32 w-full object-cover object-bottom bg-black" alt={image_alt} />
                 </div>
             )

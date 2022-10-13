@@ -18,7 +18,7 @@
 
 @layer components {
   .btn {
-    @apply bg-primary-600 p-4 rounded shadow hover:bg-primary-500 text-white focus-or-active:bg-primary-700 transition-colors;
+    @apply bg-primary-300 p-4 rounded shadow focus-active-or-hover:shadow-lg hover:bg-primary-300/70 focus-or-active:bg-primary-500 transition-colors;
   }
 
   .card-container {

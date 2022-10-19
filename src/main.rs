@@ -11,6 +11,7 @@ use yew::prelude::*;
 
 mod card;
 mod counter;
+mod hamburger;
 mod navbar;
 
 #[wasm_bindgen]

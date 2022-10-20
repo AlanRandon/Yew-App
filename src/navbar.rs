@@ -1,6 +1,6 @@
 use yew::prelude::*;
 
-use crate::hamburger::Hamburger;
+use crate::hamburger::{self, Hamburger};
 
 struct Link<'a> {
     text: &'a str,
@@ -63,11 +63,12 @@ impl Component for Navbar {
             <header class="sticky z-10 top-0">
                 <div class="flex gap-4 items-end justify-between block grow p-4 bg-base-200 shadow">
                     <h2 class="text-2xl">{ "My App" }</h2>
-                    <Hamburger/>
-                    <button onclick={link.callback(|_| Message::ToggleLinksVisible)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                        </svg>
+                    <button onclick={link.callback(|_| Message::ToggleLinksVisible)} aria-haspopup="menu" aria-label="open navbar links">
+                        <Hamburger btn_shape={if self.links_visible {
+                            hamburger::BtnShape::Close
+                        } else {
+                            hamburger::BtnShape::Hamburger
+                        }}/>
                     </button>
                 </div>
                 <nav class={classes!(
@@ -83,7 +84,10 @@ impl Component for Navbar {
                         "flex",
                         "flex-col",
                         "shadow-[0_0_0_100vmax_rgb(0_0_0_/_0.25)]",
-                        "items-center"
+                        "items-center",
+                        "w-full",
+                        "text-center",
+                        "gap-4"
                     )}>
                     { links }
                 </nav>

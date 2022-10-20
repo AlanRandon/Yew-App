@@ -12,90 +12,75 @@ impl BtnShape {
     }
 }
 
-pub struct Hamburger {
-    btn_shape: BtnShape,
+#[derive(PartialEq, Eq, Properties)]
+pub struct Props {
+    pub btn_shape: BtnShape,
 }
 
-pub enum Message {
-    Toggle,
-}
+pub struct Hamburger;
 
 impl Component for Hamburger {
-    type Message = Message;
-    type Properties = ();
+    type Message = ();
+    type Properties = Props;
 
     fn create(_ctx: &Context<Self>) -> Self {
-        Self {
-            btn_shape: BtnShape::Hamburger,
-        }
+        Self {}
     }
 
-    fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
-        match msg {
-            Message::Toggle => {
-                if self.btn_shape.is_hamburger() {
-                    self.btn_shape = BtnShape::Close;
-                } else {
-                    self.btn_shape = BtnShape::Hamburger;
-                }
-                true
-            }
-        }
-    }
+    // fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
+    //     false
+    // }
 
     fn view(&self, ctx: &Context<Self>) -> Html {
-        let link = ctx.link();
-        let is_close = !self.btn_shape.is_hamburger();
+        let is_close = !ctx.props().btn_shape.is_hamburger();
 
         html! {
-            <button onclick={link.callback(|_| Message::Toggle)}>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100" stroke-width="5" stroke="currentColor" class="w-6 h-6">
-                    <g
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100" stroke-width="5" stroke="currentColor" class="w-6 h-6 hover:opacity-70 transition">
+                <g
+                    class={classes!(
+                        is_close.then(|| vec!["rotate-45", "delay-100"]),
+                        "origin-center",
+                        "transition"
+                    )}
+                >
+                    <line
+                        x1="5"
+                        y1="25"
+                        x2="95"
+                        y2="25"
+                        stroke-linecap="round"
                         class={classes!(
-                            is_close.then(|| "rotate-45"),
-                            "origin-center",
-                            "ease-[cubic-bezier(0.0,0.05,0.795,0.035)]"
+                            is_close.then(|| "translate-y-[25px]"),
+                            "transition"
                         )}
-                    >
-                        <line
-                            x1="5"
-                            y1="25"
-                            x2="95"
-                            y2="25"
-                            stroke-linecap="round"
-                            class={classes!(
-                                is_close.then(|| "translate-y-[25px]"),
-                                "transition"
-                            )}
-                        />
-                        <line
-                            x1="5"
-                            y1="50"
-                            x2="95"
-                            y2="50"
-                            stroke-linecap="round"
-                            class={classes!(
-                                is_close
-                                    .then(|| vec!["rotate-90"]),
-                                "transition",
-                                "origin-center"
-                            )}
-                        />
-                        <line
-                            x1="5"
-                            y1="75"
-                            x2="95"
-                            y2="75"
-                            stroke-linecap="round"
-                            class={classes!(
-                                is_close
-                                    .then(|| vec!["-translate-y-[25px]"]),
-                                "transition"
-                            )}
-                        />
-                    </g>
-                </svg>
-            </button>
+                    />
+                    <line
+                        x1="5"
+                        y1="50"
+                        x2="95"
+                        y2="50"
+                        stroke-linecap="round"
+                        class={classes!(
+                            is_close
+                                .then(|| vec!["rotate-90", "delay-200"]),
+                            "transition",
+                            "origin-center"
+                        )}
+                    />
+                    <line
+                        x1="5"
+                        y1="75"
+                        x2="95"
+                        y2="75"
+                        stroke-linecap="round"
+                        class={classes!(
+                            is_close
+                                .then(|| vec!["-translate-y-[25px]"]),
+                            "transition"
+                        )}
+                    />
+                </g>
+            </svg>
         }
     }
 }

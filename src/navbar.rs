@@ -7,20 +7,10 @@ struct Link<'a> {
     url: &'a str,
 }
 
-static LINKS: &[Link] = &[
-    Link {
-        text: "Home",
-        url: "#1",
-    },
-    Link {
-        text: "About",
-        url: "#2",
-    },
-    Link {
-        text: "Really, Really, Really Verbose Name For A Page That Is A Bit Ridiculous",
-        url: "#3",
-    },
-];
+static LINKS: &[Link] = &[Link {
+    text: "Home",
+    url: "/",
+}];
 
 pub struct Navbar {
     links_visible: bool,
@@ -79,7 +69,7 @@ impl Component for Navbar {
                         "absolute",
                         "left-0",
                         "p-4",
-                        "bg-base-200",
+                        "bg-base-200/80",
                         "z-[-1]",
                         "flex",
                         "flex-col",

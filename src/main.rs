@@ -61,7 +61,7 @@ impl Component for App {
                 <main class="flex flex-col items-center gap-4 p-4 w-full">
                     <div class="card-container grow gap-4">
                         {
-                            for (0..=10).map(|i| {
+                            for (0..3).map(|i| {
                                 let image = format!("https://picsum.photos/536/354.webp?random={}", i);
                                 html! {
                                     <Card title="Lorem Ipsum" image={image}>

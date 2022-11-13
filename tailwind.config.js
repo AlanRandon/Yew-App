@@ -14,9 +14,6 @@ module.exports = {
   content: ["./src/**/*.{html,rs,css}"],
   theme: {
     extend: {
-      spacing: {
-        input: "0.75em",
-      },
       colors: {
         transparent: "transparent",
         // For impact points (e.g. btns)
@@ -26,9 +23,6 @@ module.exports = {
         // For large blocks
         base: colors.slate,
       },
-      transitionDuration: {
-        input: "100ms",
-      },
       backgroundImage: {
         "random-img": "url(https://picsum.photos/536/354)",
       },
@@ -37,14 +31,13 @@ module.exports = {
       themes: [
         {
           light: {
-            primary: "#a991f7",
-            secondary: "#f6d860",
-            accent: "#37cdbe",
-            neutral: "#3d4451",
-            "base-100": "#ffffff",
+            primary: colors.sky[500],
+            secondary: colors.purple[500],
+            accent: colors.fuchsia[500],
+            neutral: colors.slate[500],
+            "base-100": colors.slate[50],
           },
         },
-        "dark",
       ],
     },
   },

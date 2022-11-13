@@ -17,10 +17,6 @@
 }
 
 @layer components {
-  .btn {
-    @apply bg-primary-300 p-4 rounded shadow focus-active-or-hover:shadow-lg hover:bg-primary-300/70 focus-or-active:bg-primary-500 transition-colors;
-  }
-
   .card-container {
     @apply grid justify-items-center;
     grid-template-columns: repeat(auto-fit, minmax(40ch, 1fr));

@@ -42,42 +42,62 @@ impl Component for Navbar {
 
     fn view(&self, ctx: &Context<Self>) -> Html {
         let link = ctx.link();
-        let links = LINKS.iter().map(|Link { text, url }| {
-            html!{
-                <a href={ *url } class="text-black focus-active-or-hover:text-primary-700 border border-0 border-transparent border-b-2 focus-or-active:border-current transition-colors shrink">
-                    { text }
-                </a>
-            }
-        }).collect::<Html>();
+        let links = LINKS
+            .iter()
+            .map(|Link { text, url }| {
+                html! {
+                    <li>
+                        <a href={ *url }>
+                            { text }
+                        </a>
+                    </li>
+                }
+            })
+            .collect::<Html>();
         html! {
-            <header class="sticky z-10 top-0">
-                <div class="flex gap-4 items-end justify-between block grow p-4 bg-base-200 shadow">
-                    <h2 class="text-2xl">{ "My App" }</h2>
-                    <button onclick={link.callback(|_| Message::ToggleLinksVisible)} aria-haspopup="menu" aria-label="open navbar links">
+            <header class={classes!(
+                if self.links_visible {
+                    "shadow-[0_0_0_100vmax_rgba(0_0_0_/_0.35)]"
+                } else {
+                    "shadow"
+                },
+                "sticky",
+                "top-0",
+                "z-30",
+                "navbar",
+                "bg-base-200",
+                "w-full",
+                "flex-wrap",
+                "h-fit",
+                "relative"
+            )}>
+                <div class="navbar-start gap-4 h-fit z-10">
+                    <button onclick={link.callback(|_| Message::ToggleLinksVisible)} aria-haspopup="menu" aria-label="open navbar links" class="btn btn-ghost grid place-items-center">
                         <Hamburger btn_shape={if self.links_visible {
                             hamburger::BtnShape::Close
                         } else {
                             hamburger::BtnShape::Hamburger
                         }}/>
                     </button>
+                    <h2 class="text-2xl navbar-center">{ "Generic App" }</h2>
                 </div>
+                <div class="[flex-basis:100%]" />
                 <nav class={classes!(
-                    (!self.links_visible)
-                        .then(|| vec!["top-0", "pointer-events-none", "opacity-0"])
-                        .unwrap_or_else(|| vec!["top-[100%]", "opacity-100"]),
-                        "transition-[top,opacity]",
+                        if self.links_visible {
+                            vec!["left-0", "opacity-100"]
+                        } else {
+                            vec!["scale-y-0", "opacity-0", "pointer-events-none"]
+                        },
+                        "menu",
                         "absolute",
-                        "left-0",
-                        "p-4",
-                        "bg-base-200/80",
-                        "z-[-1]",
-                        "flex",
-                        "flex-col",
-                        "shadow-[0_0_0_100vmax_rgb(0_0_0_/_0.25)]",
-                        "items-center",
+                        "-z-50",
+                        "transition-[transform,opacity]",
+                        "bg-base-200",
                         "w-full",
-                        "text-center",
-                        "gap-4"
+                        "p-4",
+                        "top-[100%]",
+                        "left-0",
+                        "origin-top",
                     )}>
                     { links }
                 </nav>

@@ -50,7 +50,7 @@ impl Component for Hamburger {
                         y2="25"
                         stroke-linecap="round"
                         class={classes!(
-                            is_close.then(|| "translate-y-[25px]"),
+                            is_close.then_some("translate-y-[25px]"),
                             "transition"
                         )}
                     />
